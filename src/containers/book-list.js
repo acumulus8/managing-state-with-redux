@@ -9,7 +9,13 @@ class BookList extends Component {
   renderList = () => {
     return this.props.books.map(book => {
       return (
-        <li key={book.title} className="list-group-item">{book.title}</li>
+        <li 
+          onClick={() => this.props.selectBook(book)}
+          key={book.title} 
+          className="list-group-item"
+        >
+          {book.title}
+        </li>
       );
     });
   }
@@ -35,6 +41,7 @@ function mapStateToProps(state) {
 }
 
 //anything returned from this function will end up as props on the BookList 
+//this is the process of wiring up our action creator to redux. we can't simply import our action creators and use tem straight away. they need to be wired to redux so they can be used by the reducers.
 function mapDispatchToProps(dispatch) {
   //whenever selectBook is called, the result should be passed to all of our reducers
   //this is what bind action creators does, it takes all the action creators we pass to it, and passes them to the dispatch function which spits them out to our reducers
